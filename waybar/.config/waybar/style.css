@@ -1,0 +1,185 @@
+@import "mocha.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "MesloLGS Nerd Font Mono", "Noto Sans", monospace;
+    font-size: 14px;
+    font-weight: bold;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    background-color: alpha(@crust, 0.85);
+    color: @text;
+    border-bottom: 2px solid alpha(@surface0, 0.6);
+    transition-duration: 0.2s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+tooltip {
+    background-color: @base;
+    border: 2px solid @mauve;
+    border-radius: 8px;
+    padding: 4px;
+    color: @text;
+}
+
+tooltip label {
+    color: @text;
+}
+
+#workspaces {
+    margin: 4px 8px;
+    padding: 0;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    margin: 0 2px;
+    background-color: alpha(@surface0, 0.6);
+    color: @subtext1;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    min-width: 24px;
+}
+
+#workspaces button:hover {
+    background-color: alpha(@surface1, 0.9);
+    color: @text;
+    border-top: 2px solid @lavender;
+}
+
+#workspaces button.active {
+    color: @crust;
+    background-color: @mauve;
+    border-top: 2px solid @mauve;
+}
+
+#workspaces button.urgent {
+    color: @red;
+    border-top: 2px solid @red;
+}
+
+#workspaces button.empty {
+    color: @overlay0;
+    background-color: alpha(@surface0, 0.3);
+    border-top: 2px solid transparent;
+}
+
+#workspaces button:hover {
+    background-color: alpha(@surface0, 0.5);
+    color: @text;
+    border-top: 2px solid @mauve;
+}
+
+#workspaces button.active {
+    color: @mauve;
+    border-top: 2px solid @mauve;
+    background-color: alpha(@surface0, 0.4);
+}
+
+#workspaces button.urgent {
+    color: @red;
+    border-top: 2px solid @red;
+}
+
+#workspaces button.empty {
+    color: #4e5f8a;
+}
+
+#submap {
+    color: @peach;
+    font-style: italic;
+    margin-right: 8px;
+}
+
+#window {
+    color: @subtext1;
+    margin: 4px 8px;
+    padding: 0 8px;
+}
+
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#tray {
+    padding: 2px 10px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    background-color: alpha(@surface0, 0.5);
+    color: @text;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+#clock {
+    color: @maroon;
+    border-bottom: 2px solid @maroon;
+}
+
+#battery {
+    color: @green;
+    border-bottom: 2px solid @green;
+}
+
+#battery.warning {
+    color: @peach;
+    border-bottom: 2px solid @peach;
+}
+
+#battery.critical:not(.charging) {
+    color: @red;
+    border-bottom: 2px solid @red;
+    animation: blink 1s steps(1) infinite;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: @teal;
+    border-bottom: 2px solid @teal;
+}
+
+@keyframes blink {
+    to { background-color: alpha(@red, 0.2); }
+}
+
+#pulseaudio {
+    color: @blue;
+    border-bottom: 2px solid @blue;
+}
+
+#pulseaudio.muted {
+    color: @overlay0;
+    border-bottom: 2px solid @overlay0;
+}
+
+#network {
+    color: @yellow;
+    border-bottom: 2px solid @yellow;
+}
+
+#network.disconnected {
+    color: @red;
+    border-bottom: 2px solid @red;
+}
+
+#tray {
+    border-bottom: none;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: alpha(@red, 0.3);
+}

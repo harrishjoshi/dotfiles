@@ -1,0 +1,115 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+    "spacing": 4,
+    "margin-top": 0,
+    "margin-bottom": 0,
+
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/submap"
+    ],
+
+    "modules-center": [
+        "hyprland/window"
+    ],
+
+    "modules-right": [
+        "network",
+        "pulseaudio",
+        "battery",
+        "clock",
+        "tray"
+    ],
+
+    "hyprland/workspaces": {
+        "format": "{id}",
+        "persistent-workspaces": {
+            "*": 5
+        },
+        "on-scroll-up":   "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1",
+        "sort-by": "id"
+    },
+
+    "hyprland/submap": {
+        "format": " {}",
+        "tooltip": false
+    },
+
+    "hyprland/window": {
+        "format": "{}",
+        "separate-outputs": true,
+        "max-length": 60,
+        "rewrite": {
+            "(.*) — Mozilla Firefox": " $1",
+            "(.*) - kitty":           " $1",
+            "kitty":                  " Terminal"
+        }
+    },
+
+    "network": {
+        "format-wifi":        "󰤨  {essid}",
+        "format-ethernet":    "󰈀  {ipaddr}",
+        "format-disconnected": "󰤭  Disconnected",
+        "format-linked":      "󰌹  {ifname} (No IP)",
+        "tooltip-format-wifi": "{essid}\nSignal: {signalStrength}%\n{ipaddr}",
+        "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
+        "on-click": "nm-connection-editor",
+        "interval": 10
+    },
+
+    "pulseaudio": {
+        "format":       "{icon}  {volume}%",
+        "format-muted": "󰝟  Muted",
+        "format-icons": {
+            "headphone": "",
+            "headset":   "",
+            "portable":  "",
+            "car":       "",
+            "default":   ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click":       "pavucontrol",
+        "on-scroll-up":   "pactl set-sink-volume @DEFAULT_SINK@ +2%",
+        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%"
+    },
+
+    "battery": {
+        "states": {
+            "warning":  30,
+            "critical": 15
+        },
+        "format":          "{icon}  {capacity}%",
+        "format-charging": "󰂄  {capacity}%",
+        "format-plugged":  "󰚥  {capacity}%",
+        "format-full":     "󰁹  Full",
+        "format-alt":      "{icon}  {time}",
+        "format-icons":    ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "tooltip-format":  "Battery: {capacity}%\n{timeTo}",
+        "interval": 30
+    },
+
+    "clock": {
+        "format":         "󰃭  {:%a %d %b  %H:%M}",
+        "format-alt":     "󰸗  {:%Y-%m-%d}",
+        "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode":      "month",
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months":   "<span color='#cba6f7'><b>{}</b></span>",
+                "days":     "<span color='#cdd6f4'>{}</span>",
+                "weeks":    "<span color='#74c7ec'>{}</span>",
+                "weekdays": "<span color='#a6e3a1'><b>{}</b></span>",
+                "today":    "<span color='#f38ba8'><b>{}</b></span>"
+            }
+        }
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing":   8
+    }
+}

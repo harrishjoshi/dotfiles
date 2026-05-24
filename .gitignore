@@ -1,0 +1,7 @@
+# Tmux plugins — reinstall with prefix + I (tpm)
+tmux/.config/tmux/plugins/
+
+# Backgrounds — exclude all except default wallpapers
+backgrounds/.config/backgrounds/*
+!backgrounds/.config/backgrounds/wallpaper-0.png
+!backgrounds/.config/backgrounds/wallpaper-1.png
