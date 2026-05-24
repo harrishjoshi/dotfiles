@@ -103,3 +103,7 @@ hl.bind(
 	mainMod .. " + SHIFT + F",
 	hl.dsp.exec_cmd("hyprctl eval \"hl.monitor({ output = 'eDP-1', disabled = false })\"")
 )
+
+-- Move entire workspace to next/previous monitor
+hl.bind(mainMod .. " + SHIFT + up", hl.dsp.workspace.move({ monitor = "+1" }))
+hl.bind(mainMod .. " + SHIFT + down", hl.dsp.workspace.move({ monitor = "-1" }))
