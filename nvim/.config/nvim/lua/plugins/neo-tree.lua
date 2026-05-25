@@ -8,6 +8,16 @@ return {
     },
     lazy = false,
     config = function()
+      require("neo-tree").setup({
+        filesystem = {
+          filtered_items = {
+            visible = true,
+            hide_dotfiles = false,
+            hide_gitignored = false,
+          },
+        },
+      })
+
       vim.keymap.set("n", "<C-e>", function()
         local path = vim.fn.expand("%:p")
         if path == "" or vim.fn.isdirectory(path) == 1 then

@@ -1,5 +1,4 @@
 -- Default: preferred resolution, auto position, scale 1.2
--- Adjust scale for your display (1.0 = no scaling, 1.6 = HiDPI)
 hl.monitor({
 	output = "",
 	mode = "preferred",
@@ -15,13 +14,29 @@ hl.monitor({
 	scale = 1.0,
 })
 
--- Update `position` to place eDP-1 below the external monitor
--- Y offset = external monitor height / scale
--- Example: 1440px @ 1.0 scale → "0x1440"
---          1440px @ 2.0 scale → "0x720"
+-- Detect external monitor height at startup to correctly position eDP-1 below it
+local function get_monitor_height(output)
+	local handle = io.popen("hyprctl monitors -j 2>/dev/null")
+	if not handle then
+		return nil
+	end
+
+	local result = handle:read("*a")
+	handle:close()
+
+	local pattern = '"name"%s*:%s*"' .. output .. '".-"height"%s*:%s*(%d+)'
+	local height = result:match(pattern)
+
+	return tonumber(height)
+end
+
+-- Falls back to 1080 if external monitor is not connected
+local edp_y = get_monitor_height("HDMI-A-1") or 1080
+
+-- Laptop screen: positioned below external monitor
 hl.monitor({
 	output = "eDP-1",
 	mode = "preferred",
-	position = "0x1440",
+	position = "0x" .. edp_y,
 	scale = 1.0,
 })
